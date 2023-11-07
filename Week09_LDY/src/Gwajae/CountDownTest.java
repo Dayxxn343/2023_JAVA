@@ -13,13 +13,8 @@ public class CountDownTest extends JFrame {
     private Thread t;
 
     class Counter extends Thread {
-        private boolean counting;
-
         public void run() {
             for (int i = 0; i <= 10; i++) {
-                if (!counting) {
-                    return;
-                }
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -59,12 +54,13 @@ public class CountDownTest extends JFrame {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 t = new Counter();
-                t.counting = true; // 카운트 시작 플래그 설정
                 t.start();
             }
         });
 
         setVisible(true);
+        t = new Counter();
+        t.start();
     }
 
 	public static void main(String[] args) {
